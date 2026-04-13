@@ -1,0 +1,46 @@
+[package]
+name = "asm330lhh-rs"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.87.0"
+readme = "README.md"
+license = "BSD-3-Clause"
+categories = ["embedded", "no-std"]
+keywords = ["st", "mems", "imu"]
+repository = "https://github.com/STMicroelectronics/asm330lhh-rs"
+description = """
+  Platform-agnostic driver for the ASM330LHH high-accuracy 3D accelerometer and gyroscope with
+  ultra-low noise, smart FIFO and advanced industrial features.
+"""
+
+[lib]
+doctest = false
+
+[dependencies]
+bisync = "0.3.0"
+bitfield-struct = "0.11.0"
+embedded-hal = "1.0.0"
+embedded-hal-async = "1.0.0"
+derive_more = { version = "2.0.1", default-features = false, features = [ "try_from" ] }
+st-mems-bus = "2.0.0"
+st-mem-bank-macro = "2.0.0"
+half = "2.7.1"
+
+# Features
+# --------
+# - By default the async API is enabled via the `async` feature.
+#   Enable `blocking` to use the blocking variant instead.
+#
+# - Bit order defaults to Least Significant Bit first.
+#   Enable `bit_order_msb` to use Most Significant Bit first.
+[features]
+default = ["async"]
+# Expose the asynchronous driver module.
+async = []
+# Expose the blocking driver module.
+blocking = []
+# Use Most Significant Bit first instead of the default LSB-first ordering.
+bit_order_msb = []
+
+[package.metadata.docs.rs]
+all-features = true
